@@ -1,0 +1,187 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux8Way16.hdl
+
+/**
+ * 8-way 16-bit multiplexor:
+ * out = a if sel == 000
+ *       b if sel == 001
+ *       etc.
+ *       h if sel == 111
+ */
+
+CHIP Mux8Way16 {
+    IN a[16], b[16], c[16], d[16],
+       e[16], f[16], g[16], h[16],
+       sel[3];
+    OUT out[16];
+
+    PARTS:
+    Not(in = sel[0], out = notsel0);
+    Not(in = sel[1], out = notsel1);
+    Not(in = sel[2], out = notsel2);
+    
+    And4(in[0] = a[0], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a50);
+    And4(in[0] = b[0], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b50);
+    And4(in[0] = c[0], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c50);
+    And4(in[0] = d[0], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d50);
+    And4(in[0] = e[0], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e50);
+    And4(in[0] = f[0], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f50);
+    And4(in[0] = g[0], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g50);
+    And4(in[0] = h[0], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h50);
+
+    And4(in[0] = a[1], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a51);
+    And4(in[0] = b[1], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b51);
+    And4(in[0] = c[1], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c51);
+    And4(in[0] = d[1], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d51);
+    And4(in[0] = e[1], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e51);
+    And4(in[0] = f[1], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f51);
+    And4(in[0] = g[1], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g51);
+    And4(in[0] = h[1], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h51);
+
+    And4(in[0] = a[2], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a52);
+    And4(in[0] = b[2], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b52);
+    And4(in[0] = c[2], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c52);
+    And4(in[0] = d[2], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d52);
+    And4(in[0] = e[2], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e52);
+    And4(in[0] = f[2], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f52);
+    And4(in[0] = g[2], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g52);
+    And4(in[0] = h[2], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h52);
+
+    And4(in[0] = a[3], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a53);
+    And4(in[0] = b[3], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b53);
+    And4(in[0] = c[3], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c53);
+    And4(in[0] = d[3], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d53);
+    And4(in[0] = e[3], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e53);
+    And4(in[0] = f[3], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f53);
+    And4(in[0] = g[3], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g53);
+    And4(in[0] = h[3], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h53);
+
+    And4(in[0] = a[4], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a54);
+    And4(in[0] = b[4], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b54);
+    And4(in[0] = c[4], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c54);
+    And4(in[0] = d[4], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d54);
+    And4(in[0] = e[4], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e54);
+    And4(in[0] = f[4], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f54);
+    And4(in[0] = g[4], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g54);
+    And4(in[0] = h[4], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h54);
+
+    And4(in[0] = a[5], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a55);
+    And4(in[0] = b[5], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b55);
+    And4(in[0] = c[5], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c55);
+    And4(in[0] = d[5], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d55);
+    And4(in[0] = e[5], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e55);
+    And4(in[0] = f[5], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f55);
+    And4(in[0] = g[5], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g55);
+    And4(in[0] = h[5], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h55);
+
+    And4(in[0] = a[6], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a56);
+    And4(in[0] = b[6], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b56);
+    And4(in[0] = c[6], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c56);
+    And4(in[0] = d[6], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d56);
+    And4(in[0] = e[6], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e56);
+    And4(in[0] = f[6], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f56);
+    And4(in[0] = g[6], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g56);
+    And4(in[0] = h[6], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h56);
+
+    And4(in[0] = a[7], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a57);
+    And4(in[0] = b[7], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b57);
+    And4(in[0] = c[7], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c57);
+    And4(in[0] = d[7], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d57);
+    And4(in[0] = e[7], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e57);
+    And4(in[0] = f[7], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f57);
+    And4(in[0] = g[7], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g57);
+    And4(in[0] = h[7], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h57);
+
+    And4(in[0] = a[8], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a58);
+    And4(in[0] = b[8], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b58);
+    And4(in[0] = c[8], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c58);
+    And4(in[0] = d[8], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d58);
+    And4(in[0] = e[8], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e58);
+    And4(in[0] = f[8], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f58);
+    And4(in[0] = g[8], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g58);
+    And4(in[0] = h[8], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h58);
+
+    And4(in[0] = a[9], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a59);
+    And4(in[0] = b[9], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b59);
+    And4(in[0] = c[9], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c59);
+    And4(in[0] = d[9], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d59);
+    And4(in[0] = e[9], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e59);
+    And4(in[0] = f[9], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f59);
+    And4(in[0] = g[9], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g59);
+    And4(in[0] = h[9], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h59);
+
+    And4(in[0] = a[10], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a510);
+    And4(in[0] = b[10], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b510);
+    And4(in[0] = c[10], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c510);
+    And4(in[0] = d[10], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d510);
+    And4(in[0] = e[10], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e510);
+    And4(in[0] = f[10], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f510);
+    And4(in[0] = g[10], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g510);
+    And4(in[0] = h[10], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h510);
+
+    And4(in[0] = a[11], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a511);
+    And4(in[0] = b[11], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b511);
+    And4(in[0] = c[11], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c511);
+    And4(in[0] = d[11], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d511);
+    And4(in[0] = e[11], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e511);
+    And4(in[0] = f[11], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f511);
+    And4(in[0] = g[11], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g511);
+    And4(in[0] = h[11], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h511);
+
+    And4(in[0] = a[12], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a512);
+    And4(in[0] = b[12], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b512);
+    And4(in[0] = c[12], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c512);
+    And4(in[0] = d[12], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d512);
+    And4(in[0] = e[12], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e512);
+    And4(in[0] = f[12], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f512);
+    And4(in[0] = g[12], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g512);
+    And4(in[0] = h[12], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h512);
+
+    And4(in[0] = a[13], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a513);
+    And4(in[0] = b[13], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b513);
+    And4(in[0] = c[13], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c513);
+    And4(in[0] = d[13], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d513);
+    And4(in[0] = e[13], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e513);
+    And4(in[0] = f[13], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f513);
+    And4(in[0] = g[13], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g513);
+    And4(in[0] = h[13], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h513);
+
+    And4(in[0] = a[14], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a514);
+    And4(in[0] = b[14], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b514);
+    And4(in[0] = c[14], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c514);
+    And4(in[0] = d[14], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d514);
+    And4(in[0] = e[14], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e514);
+    And4(in[0] = f[14], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f514);
+    And4(in[0] = g[14], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g514);
+    And4(in[0] = h[14], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h514);
+
+    And4(in[0] = a[15], in[1] = notsel0, in[2] = notsel1, in[3] = notsel2, out = a515);
+    And4(in[0] = b[15], in[1] = sel[0], in[2] = notsel1, in[3] = notsel2, out = b515);
+    And4(in[0] = c[15], in[1] = notsel0, in[2] = sel[1], in[3] = notsel2, out = c515);
+    And4(in[0] = d[15], in[1] = sel[0], in[2] = sel[1], in[3] = notsel2, out = d515);
+    And4(in[0] = e[15], in[1] = notsel0, in[2] = notsel1, in[3] = sel[2], out = e515);
+    And4(in[0] = f[15], in[1] = sel[0], in[2] = notsel1, in[3] = sel[2], out = f515);
+    And4(in[0] = g[15], in[1] = notsel0, in[2] = sel[1], in[3] = sel[2], out = g515);
+    And4(in[0] = h[15], in[1] = sel[0], in[2] = sel[1], in[3] = sel[2], out = h515);
+
+    Or8Way(in[0] = a50, in[1] = b50, in[2] = c50, in[3] = d50, in[4] = e50, in[5] = f50, in[6] = g50, in[7] = h50, out = out[0]);
+    Or8Way(in[0] = a51, in[1] = b51, in[2] = c51, in[3] = d51, in[4] = e51, in[5] = f51, in[6] = g51, in[7] = h51, out = out[1]);
+    Or8Way(in[0] = a52, in[1] = b52, in[2] = c52, in[3] = d52, in[4] = e52, in[5] = f52, in[6] = g52, in[7] = h52, out = out[2]);
+    Or8Way(in[0] = a53, in[1] = b53, in[2] = c53, in[3] = d53, in[4] = e53, in[5] = f53, in[6] = g53, in[7] = h53, out = out[3]);
+    Or8Way(in[0] = a54, in[1] = b54, in[2] = c54, in[3] = d54, in[4] = e54, in[5] = f54, in[6] = g54, in[7] = h54, out = out[4]);
+    Or8Way(in[0] = a55, in[1] = b55, in[2] = c55, in[3] = d55, in[4] = e55, in[5] = f55, in[6] = g55, in[7] = h55, out = out[5]);
+    Or8Way(in[0] = a56, in[1] = b56, in[2] = c56, in[3] = d56, in[4] = e56, in[5] = f56, in[6] = g56, in[7] = h56, out = out[6]);
+    Or8Way(in[0] = a57, in[1] = b57, in[2] = c57, in[3] = d57, in[4] = e57, in[5] = f57, in[6] = g57, in[7] = h57, out = out[7]);
+    Or8Way(in[0] = a58, in[1] = b58, in[2] = c58, in[3] = d58, in[4] = e58, in[5] = f58, in[6] = g58, in[7] = h58, out = out[8]);
+    Or8Way(in[0] = a59, in[1] = b59, in[2] = c59, in[3] = d59, in[4] = e59, in[5] = f59, in[6] = g59, in[7] = h59, out = out[9]);
+    Or8Way(in[0] = a510, in[1] = b510, in[2] = c510, in[3] = d510, in[4] = e510, in[5] = f510, in[6] = g510, in[7] = h510, out = out[10]);
+    Or8Way(in[0] = a511, in[1] = b511, in[2] = c511, in[3] = d511, in[4] = e511, in[5] = f511, in[6] = g511, in[7] = h511, out = out[11]);
+    Or8Way(in[0] = a512, in[1] = b512, in[2] = c512, in[3] = d512, in[4] = e512, in[5] = f512, in[6] = g512, in[7] = h512, out = out[12]);
+    Or8Way(in[0] = a513, in[1] = b513, in[2] = c513, in[3] = d513, in[4] = e513, in[5] = f513, in[6] = g513, in[7] = h513, out = out[13]);
+    Or8Way(in[0] = a514, in[1] = b514, in[2] = c514, in[3] = d514, in[4] = e514, in[5] = f514, in[6] = g514, in[7] = h514, out = out[14]);
+    Or8Way(in[0] = a515, in[1] = b515, in[2] = c515, in[3] = d515, in[4] = e515, in[5] = f515, in[6] = g515, in[7] = h515, out = out[15]);
+
+
+}

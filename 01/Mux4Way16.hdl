@@ -1,0 +1,117 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux4Way16.hdl
+
+/**
+ * 4-way 16-bit multiplexor:
+ * out = a if sel == 00
+ *       b if sel == 01
+ *       c if sel == 10
+ *       d if sel == 11
+ */
+
+CHIP Mux4Way16 {
+    IN a[16], b[16], c[16], d[16], sel[2];
+    OUT out[16];
+
+    PARTS:
+    Not(in = sel[0], out = notsel0);
+    Not(in = sel[1], out = notsel1);
+    
+    And3Way(a = a[0], b = notsel0, c = notsel1, out = a3w0);
+    And3Way(a = b[0], b = sel[0], c = notsel1, out = b3w0);
+    And3Way(a = c[0], b = notsel0, c = sel[1], out = c3w0);
+    And3Way(a = d[0], b = sel[0], c = sel[1], out = d3w0);
+    Or4Way(a = a3w0, b = b3w0, c = c3w0, d = d3w0, out = out[0]);
+
+    And3Way(a = a[1], b = notsel0, c = notsel1, out = a3w1);
+    And3Way(a = b[1], b = sel[0], c = notsel1, out = b3w1);
+    And3Way(a = c[1], b = notsel0, c = sel[1], out = c3w1);
+    And3Way(a = d[1], b = sel[0], c = sel[1], out = d3w1);
+    Or4Way(a = a3w1, b = b3w1, c = c3w1, d = d3w1, out = out[1]);
+
+    And3Way(a = a[2], b = notsel0, c = notsel1, out = a3w2);
+    And3Way(a = b[2], b = sel[0], c = notsel1, out = b3w2);
+    And3Way(a = c[2], b = notsel0, c = sel[1], out = c3w2);
+    And3Way(a = d[2], b = sel[0], c = sel[1], out = d3w2);
+    Or4Way(a = a3w2, b = b3w2, c = c3w2, d = d3w2, out = out[2]);
+
+    And3Way(a = a[3], b = notsel0, c = notsel1, out = a3w3);
+    And3Way(a = b[3], b = sel[0], c = notsel1, out = b3w3);
+    And3Way(a = c[3], b = notsel0, c = sel[1], out = c3w3);
+    And3Way(a = d[3], b = sel[0], c = sel[1], out = d3w3);
+    Or4Way(a = a3w3, b = b3w3, c = c3w3, d = d3w3, out = out[3]);
+
+    And3Way(a = a[4], b = notsel0, c = notsel1, out = a3w4);
+    And3Way(a = b[4], b = sel[0], c = notsel1, out = b3w4);
+    And3Way(a = c[4], b = notsel0, c = sel[1], out = c3w4);
+    And3Way(a = d[4], b = sel[0], c = sel[1], out = d3w4);
+    Or4Way(a = a3w4, b = b3w4, c = c3w4, d = d3w4, out = out[4]);
+
+    And3Way(a = a[5], b = notsel0, c = notsel1, out = a3w5);
+    And3Way(a = b[5], b = sel[0], c = notsel1, out = b3w5);
+    And3Way(a = c[5], b = notsel0, c = sel[1], out = c3w5);
+    And3Way(a = d[5], b = sel[0], c = sel[1], out = d3w5);
+    Or4Way(a = a3w5, b = b3w5, c = c3w5, d = d3w5, out = out[5]);
+
+    And3Way(a = a[6], b = notsel0, c = notsel1, out = a3w6);
+    And3Way(a = b[6], b = sel[0], c = notsel1, out = b3w6);
+    And3Way(a = c[6], b = notsel0, c = sel[1], out = c3w6);
+    And3Way(a = d[6], b = sel[0], c = sel[1], out = d3w6);
+    Or4Way(a = a3w6, b = b3w6, c = c3w6, d = d3w6, out = out[6]);
+
+    And3Way(a = a[7], b = notsel0, c = notsel1, out = a3w7);
+    And3Way(a = b[7], b = sel[0], c = notsel1, out = b3w7);
+    And3Way(a = c[7], b = notsel0, c = sel[1], out = c3w7);
+    And3Way(a = d[7], b = sel[0], c = sel[1], out = d3w7);
+    Or4Way(a = a3w7, b = b3w7, c = c3w7, d = d3w7, out = out[7]);
+
+    And3Way(a = a[8], b = notsel0, c = notsel1, out = a3w8);
+    And3Way(a = b[8], b = sel[0], c = notsel1, out = b3w8);
+    And3Way(a = c[8], b = notsel0, c = sel[1], out = c3w8);
+    And3Way(a = d[8], b = sel[0], c = sel[1], out = d3w8);
+    Or4Way(a = a3w8, b = b3w8, c = c3w8, d = d3w8, out = out[8]);
+
+    And3Way(a = a[9], b = notsel0, c = notsel1, out = a3w9);
+    And3Way(a = b[9], b = sel[0], c = notsel1, out = b3w9);
+    And3Way(a = c[9], b = notsel0, c = sel[1], out = c3w9);
+    And3Way(a = d[9], b = sel[0], c = sel[1], out = d3w9);
+    Or4Way(a = a3w9, b = b3w9, c = c3w9, d = d3w9, out = out[9]);
+
+    And3Way(a = a[10], b = notsel0, c = notsel1, out = a3w10);
+    And3Way(a = b[10], b = sel[0], c = notsel1, out = b3w10);
+    And3Way(a = c[10], b = notsel0, c = sel[1], out = c3w10);
+    And3Way(a = d[10], b = sel[0], c = sel[1], out = d3w10);
+    Or4Way(a = a3w10, b = b3w10, c = c3w10, d = d3w10, out = out[10]);
+
+    And3Way(a = a[11], b = notsel0, c = notsel1, out = a3w11);
+    And3Way(a = b[11], b = sel[0], c = notsel1, out = b3w11);
+    And3Way(a = c[11], b = notsel0, c = sel[1], out = c3w11);
+    And3Way(a = d[11], b = sel[0], c = sel[1], out = d3w11);
+    Or4Way(a = a3w11, b = b3w11, c = c3w11, d = d3w11, out = out[11]);
+
+    And3Way(a = a[12], b = notsel0, c = notsel1, out = a3w12);
+    And3Way(a = b[12], b = sel[0], c = notsel1, out = b3w12);
+    And3Way(a = c[12], b = notsel0, c = sel[1], out = c3w12);
+    And3Way(a = d[12], b = sel[0], c = sel[1], out = d3w12);
+    Or4Way(a = a3w12, b = b3w12, c = c3w12, d = d3w12, out = out[12]);
+
+    And3Way(a = a[13], b = notsel0, c = notsel1, out = a3w13);
+    And3Way(a = b[13], b = sel[0], c = notsel1, out = b3w13);
+    And3Way(a = c[13], b = notsel0, c = sel[1], out = c3w13);
+    And3Way(a = d[13], b = sel[0], c = sel[1], out = d3w13);
+    Or4Way(a = a3w13, b = b3w13, c = c3w13, d = d3w13, out = out[13]);
+
+    And3Way(a = a[14], b = notsel0, c = notsel1, out = a3w14);
+    And3Way(a = b[14], b = sel[0], c = notsel1, out = b3w14);
+    And3Way(a = c[14], b = notsel0, c = sel[1], out = c3w14);
+    And3Way(a = d[14], b = sel[0], c = sel[1], out = d3w14);
+    Or4Way(a = a3w14, b = b3w14, c = c3w14, d = d3w14, out = out[14]);
+
+    And3Way(a = a[15], b = notsel0, c = notsel1, out = a3w15);
+    And3Way(a = b[15], b = sel[0], c = notsel1, out = b3w15);
+    And3Way(a = c[15], b = notsel0, c = sel[1], out = c3w15);
+    And3Way(a = d[15], b = sel[0], c = sel[1], out = d3w15);
+    Or4Way(a = a3w15, b = b3w15, c = c3w15, d = d3w15, out = out[15]);    
+}

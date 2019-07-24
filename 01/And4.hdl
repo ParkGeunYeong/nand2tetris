@@ -1,0 +1,19 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/And4.hdl
+
+/**
+ * 4 And gate: 
+ * out = (in[0] and in[1] and in[2] and in[3])
+ */
+
+CHIP And4 {
+    IN in[4];
+    OUT out;
+
+    PARTS:
+    And(a = in[0], b = in[1], out = o1);
+    And(a = in[2], b = o1, out = o2);
+    And(a = in[3], b = o2, out = out);
+}

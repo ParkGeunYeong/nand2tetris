@@ -1,0 +1,20 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or4Way.hdl
+
+ /**
+ * 4-way Or gate:
+ * out = (a or b or c or d)
+ */
+
+CHIP Or4Way {
+    IN a, b, c, d;
+    OUT out;
+
+    PARTS:
+    Or(a = a, b = b, out = o1);
+    Or(a = o1, b = c, out = o2);
+    Or(a = o2, b = d, out = out);
+
+}
