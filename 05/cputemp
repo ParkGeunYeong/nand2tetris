@@ -1,0 +1,22 @@
+    DMux8Way(in=true,sel=instruction[0..2],a=noJMP,b=JGT,c=JEQ,d=JGE,e=JLT,f=JNE,g=JLE,h=JMP);
+    Not(in = ALUNg, out = ALUNotNg);
+    Not(in = ALUZr, out = ALUNotZr);
+    And(a = ALUNotNg, b = ALUNotZr, out = toJGT);
+    And(a = toJGT, b = JGT, out = j1);
+    And(a = ALUNotNg, b = JGE, out = j2);
+    And(a = ALUNg, b = ALUNotZr, out = toJLT);
+    And(a = toJLT, b = JLT, out = j3);
+    And(a = ALUNg, b = JLE, out = j4);
+    And(a = ALUZr, b = JGE, out = j5);
+    And(a = ALUZr, b = JLE, out = j6);
+    And(a = ALUZr, b = JEQ, out = j7);
+    And(a = ALUNotZr, b = JNE, out = j8);
+    Or8Way(in[0]=j1,in[1]=j2,in[2]=j3,in[3]=j4,in[4]=j5,in[5]=j6,in[6]=j7,in[7]=j8,out=jump1);
+    Or(a = jump1, b = JMP, out = jump2);
+    Not(in = jump2, out = jump3);
+    //noJump 점프 안 하면 1 점프 하면 0
+    Or(a = noJMP, b = jump3, out = noJump);
+
+    Or(a = AInstruction, b = noJump, out = PCInc);
+    Not(in = PCInc, out = PCLoad);
+    PC(in = ARegOut, reset = reset, load = PCLoad,inc = PCInc, out[0..14] = pc);
