@@ -16,11 +16,35 @@ bool is_digit(string str) {
 	return atoi(str.c_str()) != 0 || str.compare("0") == 0;
 }
 
-int main() {
-	string loc1 = "pong", loc2 = "Pong";
-	ifstream input1("C:\\Users\\pgy\\Desktop\\nand2tetris\\projects\\nand2tetris\\06\\" + loc1 + "\\" + loc2 + ".asm");
-	ifstream input2("C:\\Users\\pgy\\Desktop\\nand2tetris\\projects\\nand2tetris\\06\\" + loc1 + "\\" + loc2 + ".asm");
-	ofstream output("C:\\Users\\pgy\\Desktop\\nand2tetris\\projects\\nand2tetris\\06\\" + loc1 + "\\" + loc2 + ".hack");
+int main(int argc, char* args[]) {
+	string loc[4] = { "C:\\Users\\pgy\\Desktop\\nand2tetris\\projects\\nand2tetris\\06\\"};
+
+	if (argc == 1) {
+		cout << "어셈블리 파일 명을 입력해주세요." << '\n';
+		exit(1);
+	}
+	else if (argc == 2) {
+		loc[2] = args[1];
+
+		if (loc[2][loc[2].size() - 5] == 'L') {
+			loc[1] = loc[2].substr(0, loc[2].size() - 5);
+			transform(loc[1].begin(), loc[1].begin() + 1, loc[1].begin(), ::tolower);
+		}
+		else {
+			loc[1] = loc[2].substr(0, loc[2].size() - 4);
+			transform(loc[1].begin(), loc[1].begin() + 1, loc[1].begin(), ::tolower);
+		}
+		loc[3] = loc[2].substr(0, loc[2].size() - 4) + ".hack";
+		//cout << loc[2] << "  " << loc[1];
+	}
+	else {
+		cout << "어셈블리 파일 명 1개만 입력해주세요" << '\n';
+		exit(1);
+	}
+
+	ifstream input1(loc[0] + loc[1] + "\\" + loc[2]);
+	ifstream input2(loc[0] + loc[1] + "\\" + loc[2]);
+	ofstream output(loc[0] + loc[1] + "\\" + loc[3]);
 	Parser parser1(&input1);
 	Parser parser2(&input2);
 	SymbolTable symbolTable;
