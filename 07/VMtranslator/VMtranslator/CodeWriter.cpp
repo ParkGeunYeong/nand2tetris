@@ -10,31 +10,11 @@
 #define C_RETURN 7
 #define C_CALL 8
 
-string CodeWriter::compare_eq()
+string CodeWriter::compare_AB(string command)
 {
-	return "D=M-D\n@J" + tscc(0) + "\nD;JEQ\n@J"
-		+ tscc(1) + "\nD;JNE\n(J"
-		+ tscc(0) + ")\nD=-1\n@J" + tscc(2) +"\n0;JMP\n(J"
-		+ tscc(1) + ")\nD=0\n@J" + tscc(2) + "\n0;JMP\n(J"
-		+ tscc(2) + ")\n";
-}
-
-string CodeWriter::compare_gt()
-{
-	return "D=M-D\n@J" + tscc(0) + "\nD;JGT\n@J"
-		+ tscc(1) + "\nD;JLE\n(J"
-		+ tscc(0) + ")\nD=-1\n@J" + tscc(2) + "\n0;JMP\n(J"
-		+ tscc(1) + ")\nD=0\n@J" + tscc(2) + "\n0;JMP\n(J"
-		+ tscc(2) + ")\n";
-}
-
-string CodeWriter::compare_lt()
-{
-	return "D=M-D\n@J" + tscc(0) + "\nD;JLT\n@J"
-		+ tscc(1) + "\nD;JGE\n(J"
-		+ tscc(0) + ")\nD=-1\n@J" + tscc(2) + "\n0;JMP\n(J"
-		+ tscc(1) + ")\nD=0\n@J" + tscc(2) + "\n0;JMP\n(J"
-		+ tscc(2) + ")\n";
+	transform(command.begin(), command.end(), command.begin(), ::toupper);
+	return "D=M-D\n@J" + tscc(0) + "\nD;J" + command + "\n"
+		+ "D=0\n@J" + tscc(1) + "\n0;JMP\n(J" + tscc(0) + ")\nD=-1\n(J" + tscc(1) + ")\n";
 }
 
 string CodeWriter::tscc(int n)
@@ -80,15 +60,15 @@ void CodeWriter::writerArithmetic(string command)
 		text_asm += stack_popA + "D=-D\n" + stack_add;
 	}
 	else if (command == "eq") {
-		text_asm += stack_popAB + compare_eq() + stack_add;
+		text_asm += stack_popAB + compare_AB(command) + stack_add;
 		compare_count += 3;
 	}
 	else if (command == "gt") {
-		text_asm += stack_popAB + compare_gt() + stack_add;
+		text_asm += stack_popAB + compare_AB(command) + stack_add;
 		compare_count += 3;
 	}
 	else if (command == "lt") {
-		text_asm += stack_popAB + compare_lt() + stack_add;
+		text_asm += stack_popAB + compare_AB(command) + stack_add;
 		compare_count += 3;
 	}
 	else if (command == "and") {

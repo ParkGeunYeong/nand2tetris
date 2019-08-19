@@ -17,8 +17,8 @@ using namespace std;
 #define C_CALL 8
 
 int main() {
-	string filename = "StaticTest";
-	string filepath = "MemoryAccess";
+	string filename = "StackTest";
+	string filepath = "StackArithmetic";
 	string loc = "C:\\Users\\pgy\\Desktop\\nand2tetris\\projects\\nand2tetris\\07\\";
 	ifstream input(loc + filepath + "\\" + filename + "\\" + filename + ".vm");
 	Parser parser(&input);

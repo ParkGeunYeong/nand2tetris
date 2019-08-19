@@ -18,9 +18,7 @@ private:
 	string stack_popAB = "@SP\nAM=M-1\nD=M\n@SP\nAM=M-1\n";
 	string stack_popA = "@SP\nAM=M-1\nD=M\n";
 	int compare_count = 0;
-	string compare_eq();
-	string compare_gt();
-	string compare_lt();
+	string compare_AB(string cond);
 	string tscc(int n);
 	string find_index(int index);
 public:
