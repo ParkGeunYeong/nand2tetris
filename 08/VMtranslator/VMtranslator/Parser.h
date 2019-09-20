@@ -2,6 +2,7 @@
 #define PARSER_H
 #include<iostream>
 #include<fstream>
+#include<sstream>
 #include<string>
 #include<algorithm>
 using namespace std;
@@ -10,7 +11,7 @@ class Parser
 {
 private:
 	ifstream* input;
-	string instruction;
+	string instruction[3], instructionTemp;
 	string commandTypes[9] = {
 		"add","sub","neg","eq","gt","lt","and","or","not"
 	};

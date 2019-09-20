@@ -17,14 +17,14 @@ using namespace std;
 #define C_CALL 8
 
 int main() {
-	string filename = "StaticTest";
-	string filepath = "MemoryAccess";
-	string loc = "C:\\Users\\pgy\\Desktop\\nand2tetris\\projects\\nand2tetris\\07\\";
+	string filename = "SimpleFunction";
+	string filepath = "FunctionCalls";
+	string loc = "..\\..\\";
 	ifstream input(loc + filepath + "\\" + filename + "\\" + filename + ".vm");
 	Parser parser(&input);
 	ofstream output;
 	CodeWriter codeWriter(&output);
-	codeWriter.setPath("C:\\Users\\pgy\\Desktop\\nand2tetris\\projects\\nand2tetris\\07\\" + filepath + "\\" + filename);
+	codeWriter.setPath("..\\..\\" + filepath + "\\" + filename);
 	codeWriter.setFileName(filename);
 
 	if (parser.hasMoreCommands()) {
@@ -33,14 +33,29 @@ int main() {
 			if (parser.commandType() == 0) {
 				codeWriter.writerArithmetic(parser.arg1());
 			}
-			else if (parser.commandType() == 1) {
+			else if (parser.commandType() == C_PUSH) {
 				codeWriter.writePushPop(C_PUSH, parser.arg1(), parser.arg2());
 			}
-			else if (parser.commandType() == 2) {
+			else if (parser.commandType() == C_POP) {
 				codeWriter.writePushPop(C_POP, parser.arg1(), parser.arg2());
 			}
-			else if (parser.commandType() == 2) {
-				codeWriter.writePushPop(C_POP, parser.arg1(), parser.arg2());
+			else if (parser.commandType() == C_LABEL) {
+				codeWriter.writeLabel(parser.arg1());
+			}
+			else if (parser.commandType() == C_GOTO) {
+				codeWriter.writeGoto(parser.arg1());
+			}
+			else if (parser.commandType() == C_IF) {
+				codeWriter.writeIf(parser.arg1());
+			}
+			else if (parser.commandType() == C_FUNCTION) {
+				codeWriter.writeFunction(parser.arg1(), parser.arg2());
+			}
+			else if (parser.commandType() == C_RETURN) {
+				codeWriter.writeReturn();
+			}
+			else if (parser.commandType() == C_CALL) {
+				codeWriter.writeCall(parser.arg1(), parser.arg2());
 			}
 			parser.advance();
 		} while (parser.hasMoreCommands());

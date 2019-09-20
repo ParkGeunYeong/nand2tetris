@@ -167,10 +167,62 @@ void CodeWriter::writePushPop(int command, string segment, int index)
 			else text_asm += stack_popA + "@THAT\nM=D\n";
 		}
 		else if (segment == "static") {
-			text_asm += stack_popA + "@" + filename + "." + to_string(index) +"\nM=D\n";
+			text_asm += stack_popA + "@" + filename + "." + to_string(index) + "\nM=D\n";
 		}
-
 	}
+}
+
+void CodeWriter::writerInint()
+{
+}
+
+void CodeWriter::writeLabel(string label)
+{
+	text_asm += "(" + label + ")\n";
+}
+
+void CodeWriter::writeGoto(string label)
+{
+	text_asm += "@" + label + "\n0;JMP\n";
+}
+
+void CodeWriter::writeIf(string label)
+{
+	text_asm += stack_popA + "@" + label + "\nD;JNE\n";
+}
+
+void CodeWriter::writeCall(string functionName, int numArgs)
+{
+	text_asm += "@return-address\nD=A\n" + stack_add;
+	text_asm += "@LCL\nD=M\n" + stack_add;
+	text_asm += "@ARG\nD=M\n" + stack_add;
+	text_asm += "@THIS\nD=M\n" + stack_add;
+	text_asm += "@THAT\nD=M\n" + stack_add;
+	text_asm += "@SP\nD=M\n";
+	numArgs += 5;
+	while(numArgs--) text_asm += "D=D-1\n";
+	text_asm += "@ARG\nM=D\n";
+	text_asm += "@SP\nD=M\n";
+	text_asm += "@LCL\nM=D\n";
+	writeGoto(functionName);
+	writeLabel("return-address");
+}
+
+void CodeWriter::writeReturn()
+{
+	text_asm += "@LCL\nD=M\n@R14\nM=D\nD=M-1\nD=D-1\nD=D-1\nD=D-1\nD=D-1\nA=D\nD=M\n@R15\nM=D\n";
+	text_asm += stack_popA + "@ARG\nA=M\nM=D\nD=A+1\n@SP\nM=D\n";
+	text_asm += "@R14\nD=M-1\nA=D\nD=M\n@THAT\nM=D\n";
+	text_asm += "@R14\nD=M-1\nD=D-1\nA=D\nD=M\n@THIS\nM=D\n";
+	text_asm += "@R14\nD=M-1\nD=D-1\nD=D-1\nA=D\nD=M\n@ARG\nM=D\n";
+	text_asm += "@R14\nD=M-1\nD=D-1\nD=D-1\nD=D-1\nA=D\nD=M\n@LCL\nM=D\n";
+	text_asm += "@R15\nA=M\n0;JMP\n";
+}
+
+void CodeWriter::writeFunction(string functionName, int numLocals)
+{
+	writeLabel(functionName);
+	while(numLocals--) writePushPop(C_PUSH, "constant", 0);
 }
 
 void CodeWriter::close()

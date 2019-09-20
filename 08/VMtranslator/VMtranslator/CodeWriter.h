@@ -30,6 +30,13 @@ public:
 	void setPath(string path_to_dir);
 	void writerArithmetic(string command);
 	void writePushPop(int command, string segment, int index);
+	void writerInint();
+	void writeLabel(string label);
+	void writeGoto(string label);
+	void writeIf(string label);
+	void writeCall(string functionName, int numArgs);
+	void writeReturn();
+	void writeFunction(string functionName, int numLocals);
 	void close();
 };
 #endif
